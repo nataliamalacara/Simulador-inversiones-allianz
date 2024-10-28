@@ -66,9 +66,14 @@ if 1 <= len(seleccion_etfs) <= 3:
         for idx, etf_info in enumerate(etf_info_list):
             datos = yf.download(etf_info['simbolo'], period=seleccion_periodo)
 
-            # Verificar si los datos contienen la columna 'Adj Close'
-            if 'Adj Close' not in datos.columns:
-                st.error(f"No se encontró la columna 'Adj Close' para el ETF {etf_info['nombre']}. Revisa los datos o el periodo seleccionado.")
+            # Limpiar los nombres de las columnas (quitar espacios en blanco)
+            datos.columns = datos.columns.str.strip()
+
+            # Verificar si los datos contienen la columna 'Adj Close' o 'Close'
+            columna_cierre = 'Adj Close' if 'Adj Close' in datos.columns else 'Close'
+
+            if columna_cierre not in datos.columns:
+                st.error(f"No se encontró la columna 'Adj Close' o 'Close' para el ETF {etf_info['nombre']}. Revisa los datos o el periodo seleccionado.")
                 continue  # Pasamos al siguiente ETF sin agregar datos
             else:
                 datos_list.append((etf_info, datos))
@@ -81,12 +86,12 @@ if 1 <= len(seleccion_etfs) <= 3:
             st.error("No se encontraron datos para los ETFs seleccionados.")
         else:
             # Función para calcular rendimiento, volatilidad, beta, máximo drawdown, y alpha
-            def calcular_rendimiento_riesgo(datos, tasa_libre_riesgo, sp500):
+            def calcular_rendimiento_riesgo(datos, tasa_libre_riesgo, sp500, columna_cierre):
                 # Calcular rendimiento
-                rendimiento = (datos['Adj Close'][-1] - datos['Adj Close'][0]) / datos['Adj Close'][0] * 100
+                rendimiento = (datos[columna_cierre].iloc[-1] - datos[columna_cierre].iloc[0]) / datos[columna_cierre].iloc[0] * 100
                 
                 # Calcular volatilidad (desviación estándar de los rendimientos diarios)
-                rendimientos_diarios = datos['Adj Close'].pct_change().dropna()
+                rendimientos_diarios = datos[columna_cierre].pct_change().dropna()
                 volatilidad = rendimientos_diarios.std() * np.sqrt(252)  # Anualizada
 
                 # Calcular la Beta (comparando con S&P 500)
@@ -99,8 +104,8 @@ if 1 <= len(seleccion_etfs) <= 3:
                 beta = np.cov(datos_alineados.iloc[:, 0], datos_alineados.iloc[:, 1])[0, 1] / np.var(datos_alineados.iloc[:, 1])
 
                 # Calcular el máximo drawdown
-                max_value = datos['Adj Close'].cummax()
-                drawdown = (datos['Adj Close'] - max_value) / max_value
+                max_value = datos[columna_cierre].cummax()
+                drawdown = (datos[columna_cierre] - max_value) / max_value
                 max_drawdown = drawdown.min() * 100  # Expresado en %
 
                 # Calcular el Alpha
@@ -112,7 +117,7 @@ if 1 <= len(seleccion_etfs) <= 3:
             # Calcular resultados para cada ETF
             resultados = []
             for etf_info, datos in datos_list:
-                rendimiento, volatilidad, beta, max_drawdown, alpha = calcular_rendimiento_riesgo(datos, tasa_libre_riesgo, sp500)
+                rendimiento, volatilidad, beta, max_drawdown, alpha = calcular_rendimiento_riesgo(datos, tasa_libre_riesgo, sp500, columna_cierre)
                 resultados.append((etf_info['nombre'], rendimiento, volatilidad, beta, max_drawdown, alpha))
 
             # Mostrar resultados de cada ETF
@@ -134,7 +139,7 @@ if 1 <= len(seleccion_etfs) <= 3:
             st.write("**Gráfico comparativo de precios ajustados**")
             fig = px.line()
             for idx, (_, datos) in enumerate(datos_list):
-                fig.add_scatter(x=datos.index, y=datos['Adj Close'], mode='lines', name=f'{etf_info_list[idx]["nombre"]}')
+                fig.add_scatter(x=datos.index, y=datos[columna_cierre], mode='lines', name=f'{etf_info_list[idx]["nombre"]}')
             
             fig.update_layout(
                 title='Comparación de precios ajustados entre los ETFs seleccionados',
