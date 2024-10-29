@@ -33,9 +33,18 @@ seleccion_etfs = st.multiselect('Selecciona uno, dos o tres ETFs para comparar',
 if 1 <= len(seleccion_etfs) <= 3:
     etf_info_list = []
 
-    # Descargar los datos del S&P 500 una sola vez para calcular la Beta y Alpha
-    sp500 = yf.download('^GSPC', period='10y')['Adj Close']
+    # Descargar los datos del S&P 500 para calcular la Beta y Alpha
+    sp500 = yf.download('^GSPC', period='10y')
 
+    # Verificar si existe la columna 'Adj Close', si no, usar 'Close'
+    if 'Adj Close' in sp500.columns:
+        sp500 = sp500['Adj Close']
+    elif 'Close' in sp500.columns:
+        sp500 = sp500['Close']
+    else:
+        st.error("No se encontraron datos válidos para el S&P 500. Verifica la conexión o el símbolo.")
+        sp500 = None
+        
     # Obtener la información de cada ETF seleccionado
     for etf_nombre in seleccion_etfs:
         etf_info = next((etf for etf in ETFs_Data if etf['nombre'] == etf_nombre), None)
