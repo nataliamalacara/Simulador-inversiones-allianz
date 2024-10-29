@@ -1,13 +1,47 @@
 import streamlit as st
 import yfinance as yf
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-from etfs_info import ETFs_Data
-import os
-from fpdf import FPDF  # Añadimos la librería FPDF para generar PDF
+
+# Datos de los ETFs con nombres, descripciones y símbolos corregidos
+ETFs_Data = {
+    "AZ China": "ASHR",
+    "AZ MSCI TAIWAN INDEX FD": "EWT",
+    "AZ RUSSELL 2000": "IWM",
+    "AZ Brasil": "EWZ",
+    "AZ MSCI UNITED KINGDOM": "EWU",
+    "AZ DJ US FINANCIAL SECT": "IYF",
+    "AZ BRIC": "BKF",
+    "AZ MSCI SOUTH KOREA IND": "EWY",
+    "AZ BARCLAYS AGGREGATE": "AGG",
+    "AZ Mercados Emergentes": "EEM",
+    "AZ MSCI EMU": "EZU",
+    "AZ FTSE/XINHUA CHINA 25": "FXI",
+    "AZ Oro": "GLD",
+    "AZ LATIXX MEX CETETRAC": "MXX",
+    "AZ QQQ NASDAQ 100": "QQQ",
+    "AZ MSCI ASIA EX-JAPAN": "AAXJ",
+    "AZ LATIXX MEX M10TRAC": "M10.MX",
+    "AZ BARCLAYS 1-3 YEAR TR": "SHY",
+    "AZ MSCI ACWI INDEX FUND": "ACWI",
+    "AZ LATIXX MEXICO M5TRAC": "M5TRAC.MX",
+    "AZ SILVER TRUST": "SLV",
+    "AZ MSCI HONG KONG INDEX": "EWH",
+    "AZ LATIXX MEX UDITRAC": "UDITRAC.MX",
+    "AZ SPDR S&P 500 ETF TRUST": "SPY",
+    "AZ MSCI JAPAN INDEX FD": "EWJ",
+    "AZ BG EUR GOVT BOND 1-3": "IBGE.MI",
+    "AZ SPDR DJIA TRUST": "DIA",
+    "AZ MSCI FRANCE INDEX FD": "EWQ",
+    "AZ DJ US OIL & GAS EXPL": "IEO",
+    "AZ VANGUARD EMERGING MARKET ETF": "VWO",
+    "AZ MSCI AUSTRALIA INDEX": "EWA",
+    "AZ IPC LARGE CAP T R TR": "LCT.MX",
+    "AZ FINANCIAL SELECT SECTOR SPDR": "XLF",
+    "AZ MSCI CANADA": "EWC",
+    "AZ S&P LATIN AMERICA 40": "ILF",
+    "AZ HEALTH CARE SELECT SECTOR": "XLV",
+    "AZ MSCI GERMANY INDEX": "EWG",
+    "AZ DJ US HOME CONSTRUCT": "ITB"
+}
 
 # Función para obtener datos del ETF
 def obtener_datos_etf(etf_simbolo, periodo="1y"):
@@ -50,11 +84,6 @@ def mostrar_informacion_etf():
 if __name__ == "__main__":
     st.title("Simulador de ETFs")
     mostrar_informacion_etf()
-
-
-
-
-
 
 
 
