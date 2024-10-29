@@ -19,4 +19,22 @@ ETFs_Data = [
     {"nombre": "AZ Barclays 1-3 Year TR", "descripcion": "ETF que sigue el rendimiento de bonos a corto plazo", "simbolo": "SHY"},
     {"nombre": "AZ MSCI ACWI Index Fund", "descripcion": "ETF que sigue el rendimiento del índice global ACWI", "simbolo": "ACWI"},
     {"nombre": "AZ LATIXX Mexico M5TRAC", "descripcion": "ETF que sigue el rendimiento del índice M5 en México", "simbolo": "M5TRAC.MX"},
-    {"nombre": "AZ Silver Trust", "descripcion": "E
+    {"nombre": "AZ Silver Trust", "descripcion": "ETF que sigue el rendimiento de la plata", "simbolo": "SLV"},
+    {"nombre": "AZ MSCI Hong Kong Index", "descripcion": "ETF que sigue el rendimiento del mercado de Hong Kong", "simbolo": "EWH"},
+    {"nombre": "AZ LATIXX MEX UDITRAC", "descripcion": "ETF que sigue el rendimiento del índice UDI en México", "simbolo": "UDITRAC.MX"},
+    {"nombre": "AZ SPDR S&P 500 ETF Trust", "descripcion": "ETF que sigue el rendimiento del índice S&P 500", "simbolo": "SPY"},
+    {"nombre": "AZ MSCI Japan Index FD", "descripcion": "ETF que sigue el rendimiento del mercado japonés", "simbolo": "EWJ"},
+    {"nombre": "AZ BG EUR Govt Bond 1-3", "descripcion": "ETF que sigue el rendimiento de bonos gubernamentales europeos a corto plazo", "simbolo": "IBGE.MI"},
+    {"nombre": "AZ SPDR DJIA Trust", "descripcion": "ETF que sigue el rendimiento del índice Dow Jones Industrial Average", "simbolo": "DIA"},
+    {"nombre": "AZ MSCI France Index FD", "descripcion": "ETF que sigue el rendimiento del mercado francés", "simbolo": "EWQ"},
+    {"nombre": "AZ DJ US Oil & Gas Expl", "descripcion": "ETF que sigue el rendimiento del sector de exploración de petróleo y gas en EE.UU.", "simbolo": "IEO"},
+    {"nombre": "AZ Vanguard Emerging Market ETF", "descripcion": "ETF de Vanguard que sigue el rendimiento de mercados emergentes", "simbolo": "VWO"},
+    {"nombre": "AZ MSCI Australia Index", "descripcion": "ETF que sigue el rendimiento del mercado australiano", "simbolo": "EWA"},
+    {"nombre": "AZ IPC Large Cap T R TR", "descripcion": "ETF que sigue el rendimiento de las grandes empresas en México", "simbolo": "LCT.MX"},
+    {"nombre": "AZ Financial Select Sector SPDR", "descripcion": "ETF que sigue el rendimiento del sector financiero de EE.UU.", "simbolo": "XLF"},
+    {"nombre": "AZ MSCI Canada", "descripcion": "ETF que sigue el rendimiento del mercado canadiense", "simbolo": "EWC"},
+    {"nombre": "AZ S&P Latin America 40", "descripcion": "ETF que sigue el rendimiento de las 40 principales empresas en América Latina", "simbolo": "ILF"},
+    {"nombre": "AZ Health Care Select Sector", "descripcion": "ETF que sigue el rendimiento del sector de salud de EE.UU.", "simbolo": "XLV"},
+    {"nombre": "AZ MSCI Germany Index", "descripcion": "ETF que sigue el rendimiento del mercado alemán", "simbolo": "EWG"},
+    {"nombre": "AZ DJ US Home Construct", "descripcion": "ETF que sigue el rendimiento del sector de construcción en EE.UU.", "simbolo": "ITB"}
+]
